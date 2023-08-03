@@ -515,12 +515,12 @@ if (isset($_POST['new'])){
             
                 </div>
                 <div class="col-6">
-                    <h3 class="gray-text text-end text-uppercase text-sm pt-3"> simulador actualizacion: 22-12-2022</h3>
+                    <!-- <h3 class="gray-text text-end text-uppercase text-sm pt-3"> simulador actualizacion: 22-12-2022</h3> -->
                 </div>
                 
             </div>
             <div class="d-flex  align-items-center">
-                <img id="logo" class="img-logo-desarrollo" src="img/logos/porttoblanco.svg" alt="">
+                <!-- <img id="logo" class="img-logo-desarrollo" src="img/logos/porttoblanco.svg" alt=""> -->
                 <h1 class="blue-text text-uppercase ml-1"> Simulador de Pagos</h1>
             </div>
             <div class="d-flex align-items-start justify-content-end gap-3">
@@ -540,6 +540,9 @@ if (isset($_POST['new'])){
                     <div class="card p-3">
                         
                             <div class="form-group">
+                            <!-- <label class="blue-text" for="name">Parque</label>
+                                <input type="input" class="form-control" id="name" name="name" aria-describedby="name"
+                                     value="<?php echo $nombre;?>"><br> -->
                                 <label class="blue-text" for="name">Nombre</label>
                                 <input type="input" class="form-control" id="name" name="name" aria-describedby="name"
                                      value="<?php echo $nombre;?>"><br>
