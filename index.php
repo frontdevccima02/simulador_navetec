@@ -17,356 +17,262 @@ $ident = $identificador1[0] + 1;
 $des = "Selecciona tu desarrollo";
 $datos1 = "Selecciona la fecha";
 
+
 if (isset($_POST['enviar'])) {
 
     $datos2 = date('Y-m-d');
 
-    $datos1 = $_POST['date'];
+    // $datos1 = $_POST['date'];
+    $modulo = $_POST['modulo'];
+    $pulista = $_POST['pulista'];
     $lote = $_POST['lote'];
     $nombre = $_POST['name'];
-    $tipo = $_POST['tipo']; 
-    $condominio = $_POST['clusterid']; 
-    $podescuento = $_POST['descuento']; 
+
+    $condominio = "Lomas 4";
+    $podescuento = $_POST['descuento'];
     $metraje = $_POST['area']; 
     $pdenganche = $_POST['descuentoe']; 
     $emdies = $_POST['engancheextra']; 
-    $tiempo = $_POST['tiempo'];  
+    // $tiempo = $_POST['tiempo'];  
     $des = $_POST['desarrolloid'];
     
+    $op="SELECT tipo FROM parque where nombre = '$des'";
+$res=mysqli_query($conexion,$op);
+$ko = mysqli_fetch_row($res);
 
-    $sel="SELECT * FROM desarrollo where cluster = '$condominio'";
-$res=mysqli_query($conexion,$sel);
-$mos1 = mysqli_fetch_row($res);
+if($ko[0] == "lote"){
+$iva = 0;
+}else{
+$iva = 2.18;
+}
+
+
+$op1="SELECT meses FROM parque where nombre = '$des'";
+$qwe=mysqli_query($conexion,$op1);
+$meses = mysqli_fetch_row($qwe);
+
+$años = $meses[0]/12;
+
+
+//     $sel="SELECT * FROM desarrollo where cluster = '$condominio'";
+// $res=mysqli_query($conexion,$sel);
+// $mos1 = mysqli_fetch_row($res);
 
 
 
 
     
-switch($tipo){
-    case "estandar":
-    switch($condominio){
-            case "Arrecife 3":
-            case "Estepa 1":
-            case "Estepa 2":
-            case "Estepa 3":
-            case "Desierto 1":
-            case "Desierto 2":
-            case "Desierto 3":
-            case "Desierto 4":
-            case "Taiga 1":
-            case "Taiga 2":
-            case "Taiga 3":
-            case "Paramo 1":
-            case "Paramo 2":
-            case "Paramo 3":
-            case "Paramo A":
-            case "Paramo B":
-            case "Bosque 1":
-            case "Bosque 2":
-            case "Bosque 3":
-            case "Bosque 4":
-            case "Selva 1":
-            case "Selva 2":
-            case "Selva 3":
-            case "Selva 4":
-            case "Lago 1":
-            case "Lago 2":
-            case "Manglar 1":
-            case "Manglar 2": 
-            case "Manglar A":   
-            case "Manglar B":      
-        
-                $pulista = 5770.3; 
-            break;
-            case "Amatista 1":
-            case "Amatista 2":
-            case "Lomas 1":
-            case "Lomas 2":
-            case "Zafiro 1":
-            case "Zafiro 2":
-                $pulista = 4500; 
-            break;
-            case "Lomas 3":
-                $pulista = 4800; 
-            break;
-            case "Malaquita 1":
-            case "Malaquita 2":
-                $pulista = 4750; 
-            break;
-            case "Lomas 4":
-                $pulista = 4500; 
-            break;
-    }
 
-    break;
-    case "premium":
-        switch($condominio){
-            case "Arrecife 3":
-            case "Estepa 1":
-            case "Estepa 2":
-            case "Estepa 3":
-            case "Desierto 1":
-            case "Desierto 2":
-            case "Desierto 3":
-            case "Desierto 4":
-            case "Taiga 1":
-            case "Taiga 2":
-            case "Taiga 3":
-            case "Paramo 1":
-            case "Paramo 2":
-            case "Paramo 3":
-            case "Paramo A":
-            case "Paramo B":
-            case "Bosque 1":
-            case "Bosque 2":
-            case "Bosque 3":
-            case "Bosque 4":
-            case "Selva 1":
-            case "Selva 2":
-            case "Selva 3":
-            case "Selva 4":
-            case "Lago 1":
-            case "Lago 2":
-            case "Manglar 1":
-            case "Manglar 2": 
-            case "Manglar A":   
-            case "Manglar B":     
-                $pulista = 6200; 
-            break;
-            case "Amatista 1":
-            case "Amatista 2":
-            case "Lomas 1":
-            case "Lomas 2":
-            case "Zafiro 1":
-            case "Zafiro 2":
-                $pulista = 4725; 
-            break;
-            case "Lomas 3":
-                $pulista = 5040; 
-            break;
-            case "Malaquita 1":
-            case "Malaquita 2":
-                $pulista = 4990; 
-            break;
-            case "lomas 4":
-                $pulista = 4725; 
-            break;
-    }
-    break;
-}
 
-//operaciones para primer seccion de simulador
-$descuento = $podescuento*$pulista/100;
+// //operaciones para primer seccion de simulador
+ $descuento = $podescuento*$pulista/100;
 
-$pudescuento = $pulista - $descuento;
+ $pudescuento = $pulista - $descuento;
 
-$plista = $metraje * $pulista;
+// $plista = $metraje * $pulista;
 
-$descuentoc = $plista * $pudescuento;
+// $descuentoc = $plista * $pudescuento;
 
-$descuentoc = $podescuento*$plista/100;
+// $descuentoc = $podescuento*$plista/100;
 
-$montoo = $plista - $descuentoc;
+// $montoo = $plista - $descuentoc;
 
-$enganche = $montoo * 10 / 100;
+// $enganche = $montoo * 10 / 100;
 
-$denganche = $enganche * $pdenganche / 100;
+// $denganche = $enganche * $pdenganche / 100;
 
-if($emdies>$enganche){
-    $eepagar = $emdies - ($enganche - $denganche) ;
-}else{
-    $eepagar = 0;
-    $emdies = 0;
-}
-$poren1 = $eepagar / $montoo *100;
-$poren2 =round($poren1);
-$eapagar = $enganche - $denganche + $eepagar;
-$peapagara1 = $eapagar / $montoo *100;
-$peapagara2 = $peapagara1;
-$montoaf = $montoo - $enganche - $eepagar; 
-$tapagar = $eapagar + $montoaf;
-$porepagar =round( (($eapagar/$montoo)*100),1 );
+// if($emdies>$enganche){
+//     $eepagar = $emdies - ($enganche - $denganche) ;
+// }else{
+//     $eepagar = 0;
+//     $emdies = 0;
+// }
+// $poren1 = $eepagar / $montoo *100;
+// $poren2 =round($poren1);
+// $eapagar = $enganche - $denganche + $eepagar;
+// $peapagara1 = $eapagar / $montoo *100;
+// $peapagara2 = $peapagara1;
+// $montoaf = $montoo - $enganche - $eepagar; 
+// $tapagar = $eapagar + $montoaf;
+// $porepagar =round( (($eapagar/$montoo)*100),1 );
 
-$plazo = $tiempo * 12;
+// $plazo = $tiempo * 12;
 
-$ms1 = $mos1[3]; //48
-$ms2 = $mos1[4]; //72
-$ms3 = $mos1[5];//60
 
-if( ($plazo > 1) AND ($plazo  <=  $mos1[3])){
-    $ms1 = $plazo;	
-    $ms2 = 0;
-    $ms3 = 0;
- }if(($plazo  >  $mos1[3]) AND  ($plazo <=  ($mos1[3] + $mos1[4])) ){
-     $ms1 = $mos1[3];
-     $ms2 = $plazo - $mos1[3];
-     $ms3 = 0;
-  }if($plazo >  $mos1[3] + $mos1[4]){
-     $ms1 = $mos1[3];
-     $ms2 = $mos1[4];
-     $ms3 = $plazo - ($ms1+ $ms2);
-   }
+// if( ($plazo > 1) AND ($plazo  <=  $mos1[3])){
+//     $ms1 = $plazo;	
+//     $ms2 = 0;
+//     $ms3 = 0;
+//  }if(($plazo  >  $mos1[3]) AND  ($plazo <=  ($mos1[3] + $mos1[4])) ){
+//      $ms1 = $mos1[3];
+//      $ms2 = $plazo - $mos1[3];
+//      $ms3 = 0;
+//   }if($plazo >  $mos1[3] + $mos1[4]){
+//      $ms1 = $mos1[3];
+//      $ms2 = $mos1[4];
+//      $ms3 = $plazo - ($ms1+ $ms2);
+//    }
 
 
 
 
 
 
-$ms22 = $ms1 + $ms2;
+// $ms22 = $ms1 + $ms2;
 
 
 
-if($ms3 > 1){
-    $ms33 = $plazo;
-}else{
-    $ms33 = 0;
-}
+// if($ms3 > 1){
+//     $ms33 = $plazo;
+// }else{
+//     $ms33 = 0;
+// }
 
-$result = explode('-', $datos1);
-$dia1 = $result[2];
-$mes1 = $result[1];
-$año1 = $result[0];
+// $result = explode('-', $datos1);
+// // $dia1 = $result[2];
+// // $mes1 = $result[1];
+// // $año1 = $result[0];
 
-$result1 = $año1 . "-" . $mes1 . "-" . $dia1;
-
-
-$dia = $result[2];
-
-if($dia < 6){
-    $per =date("d-m-Y",strtotime($datos1."+ 1 month"));
-}else{
-    $per = date("d-m-Y",strtotime($datos1."+ 2 month"));
-}
-
-$res = explode('-', $per);
-$mes = $res[1];
-$año = $res[2];
-
-$mos ="05/". $mes."/".$año;
-$dat = $año . "-" . $mes . "-05"; 
+// $result1 = $año1 . "-" . $mes1 . "-" . $dia1;
 
 
-$abonos = 0;
+// $dia = $result[2];
 
-$les="SELECT * FROM financiamiento where 1";
-$ser=mysqli_query($conexion,$les);
-$som = mysqli_fetch_row($ser);
-$som1 = $som[1]*0;
-$som2 = $som[2]*0.01;
-$som3 = $som[3]*0.01;
-$cuota1 = 0;
-$cuota2 = 0;
-$cuota3 = 0;
+// if($dia < 6){
+//     $per =date("d-m-Y",strtotime($datos1."+ 1 month"));
+// }else{
+//     $per = date("d-m-Y",strtotime($datos1."+ 2 month"));
+// }
+
+// $res = explode('-', $per);
+// $mes = $res[1];
+// $año = $res[2];
+
+// $mos ="05/". $mes."/".$año;
+// $dat = $año . "-" . $mes . "-05"; 
 
 
-                        for($i = 1; $i <= $plazo; $i ++){
-                            $periodo = $i;
-                            $r = $i-1;
-                            if($periodo == 1){
-                                $fech = $mos;
-                                $enganche3 = $eepagar + $enganche;
-                                $financiar = $montoo - $enganche3;
-                                $si = $financiar;
-                                $interes = $som1;
-                                $mensualidades = $financiar / $plazo; 
+// $abonos = 0;
+
+// $les="SELECT * FROM financiamiento where 1";
+// $ser=mysqli_query($conexion,$les);
+// $som = mysqli_fetch_row($ser);
+// $som1 = $som[1]*0;
+// $som2 = $som[2]*0.01;
+// $som3 = $som[3]*0.01;
+// $cuota1 = 0;
+// $cuota2 = 0;
+// $cuota3 = 0;
+
+
+//                         for($i = 1; $i <= $plazo; $i ++){
+//                             $periodo = $i;
+//                             $r = $i-1;
+//                             if($periodo == 1){
+//                                 $fech = $mos;
+//                                 $enganche3 = $eepagar + $enganche;
+//                                 $financiar = $montoo - $enganche3;
+//                                 $si = $financiar;
+//                                 $interes = $som1;
+//                                 $mensualidades = $financiar / $plazo; 
                                 
-                                $pagado = $mensualidades + $abonos;
-                                $intereses = $si*$som1;
-                                $abonocapital = $mensualidades - $intereses;
-                                $saldofinal = $si - $abonocapital;  
-                                $cuota1 = $mensualidades;
-                            }
+//                                 $pagado = $mensualidades + $abonos;
+//                                 $intereses = $si*$som1;
+//                                 $abonocapital = $mensualidades - $intereses;
+//                                 $saldofinal = $si - $abonocapital;  
+//                                 $cuota1 = $mensualidades;
+//                             }
                             
-                            if($periodo > 1 AND $periodo <= $ms1){
-                                $fech = date("m/Y",strtotime($per."+ $r month"));
-                                $si= $saldofinal;
-                                $mensualidades = $financiar / $plazo; 
+//                             if($periodo > 1 AND $periodo <= $ms1){
+//                                 $fech = date("m/Y",strtotime($per."+ $r month"));
+//                                 $si= $saldofinal;
+//                                 $mensualidades = $financiar / $plazo; 
                                 
-                                $pagado = $mensualidades + $abonos;
-                                $intereses = $si*$som1;
-                                $abonocapital = $mensualidades - $intereses;
-                                $saldofinal = $si - $abonocapital;  
-                            }
+//                                 $pagado = $mensualidades + $abonos;
+//                                 $intereses = $si*$som1;
+//                                 $abonocapital = $mensualidades - $intereses;
+//                                 $saldofinal = $si - $abonocapital;  
+//                             }
                             
-                            if($periodo == $ms1+1){
-                                $fech = date("m/Y",strtotime($per."+ $r month"));
-                                $intereses = $si*$som2;
-                                $spagado = $mensualidades * $ms1;
-                                $porpagar = $financiar - $spagado;
-                                $plasor = $plazo - $ms1;
-                                $msci2 = $ms2;
-                                $añosmsci2 = $msci2 / 12;
+//                             if($periodo == $ms1+1){
+//                                 $fech = date("m/Y",strtotime($per."+ $r month"));
+//                                 $intereses = $si*$som2;
+//                                 $spagado = $mensualidades * $ms1;
+//                                 $porpagar = $financiar - $spagado;
+//                                 $plasor = $plazo - $ms1;
+//                                 $msci2 = $ms2;
+//                                 $añosmsci2 = $msci2 / 12;
 
-                                $cuota = $porpagar * (pow(1+$som[2]/100 , $plasor) * $som[2]/100)/ (pow(1+$som[2]/100, $plasor)-1);
-                                $cuota2 = $cuota;
-                            }
+//                                 $cuota = $porpagar * (pow(1+$som[2]/100 , $plasor) * $som[2]/100)/ (pow(1+$som[2]/100, $plasor)-1);
+//                                 $cuota2 = $cuota;
+//                             }
 
-                            if($periodo > $ms1 AND $periodo <= $ms22){
-                                $fech = date("m/Y",strtotime($per."+ $r month"));
-                                $interes = $som2;
-                                $si= $saldofinal;
-                                $mensualidades = $cuota; 
+//                             if($periodo > $ms1 AND $periodo <= $ms22){
+//                                 $fech = date("m/Y",strtotime($per."+ $r month"));
+//                                 $interes = $som2;
+//                                 $si= $saldofinal;
+//                                 $mensualidades = $cuota; 
                                 
-                                $pagado = $mensualidades + $abonos;
-                                $intereses = $si*$som2;
-                                $abonocapital = $mensualidades - $intereses;
-                                $saldofinal = $si - $abonocapital;  
+//                                 $pagado = $mensualidades + $abonos;
+//                                 $intereses = $si*$som2;
+//                                 $abonocapital = $mensualidades - $intereses;
+//                                 $saldofinal = $si - $abonocapital;  
                             
-                            }
+//                             }
                             
-                            if($periodo == $ms22+1){
-                                $fech = date("d/m/Y",strtotime($per."+ $r month"));
-                                $intereses = $si*$som3;
-                                $spagado2 = $mensualidades * $ms2;
-                                $porpagar = $saldofinal;
-                                $plasor = $ms3;
-                                $msci2 = $ms3;
-                                $añosmsci = $msci2 / 12;
+//                             if($periodo == $ms22+1){
+//                                 $fech = date("d/m/Y",strtotime($per."+ $r month"));
+//                                 $intereses = $si*$som3;
+//                                 $spagado2 = $mensualidades * $ms2;
+//                                 $porpagar = $saldofinal;
+//                                 $plasor = $ms3;
+//                                 $msci2 = $ms3;
+//                                 $añosmsci = $msci2 / 12;
                             
-                                $cuota = $porpagar * (pow(1+$som[3]/100 , $plasor) * $som[3]/100)/ (pow(1+$som[3]/100, $plasor)-1);
+//                                 $cuota = $porpagar * (pow(1+$som[3]/100 , $plasor) * $som[3]/100)/ (pow(1+$som[3]/100, $plasor)-1);
 
-                                $cuota3 = $cuota;
+//                                 $cuota3 = $cuota;
                               
-                            }
+//                             }
 
-                            if($periodo > $ms22 AND $periodo < $ms33+1){
-                                $fech = date("m/Y",strtotime($per."+ $r month"));
-                                $interes = $som3;
-                                $si= $saldofinal;
-                                $mensualidades = $cuota; 
+//                             if($periodo > $ms22 AND $periodo < $ms33+1){
+//                                 $fech = date("m/Y",strtotime($per."+ $r month"));
+//                                 $interes = $som3;
+//                                 $si= $saldofinal;
+//                                 $mensualidades = $cuota; 
                                 
-                                $pagado = $mensualidades + $abonos;
-                                $intereses = $si*$som3;
-                                $abonocapital = $mensualidades - $intereses;
-                                $saldofinal = $si - $abonocapital;  
-                            }
-                        }
+//                                 $pagado = $mensualidades + $abonos;
+//                                 $intereses = $si*$som3;
+//                                 $abonocapital = $mensualidades - $intereses;
+//                                 $saldofinal = $si - $abonocapital;  
+//                             }
+//                         }
 
 
                                                
 
-                        //insercion de datos en la tabla
-                        $insert = "INSERT INTO datos (`id`,`nombre`, `fecha`, `lote`, `desarrollo`, 
-                        `condominio`, `descuento`, `metros`, `tipo`, `precioU`, `precioUD`, `tiempo`, `mes1`, `mes2`, `mes3`,
-                         `monto`, `engancheE`, `desenganche`, `engancheEx`, `engancheP`, `totalP`, `Importe`, `mens1`, `mens2`,
-                          `mens3`,`fech`,`dato`,`pdenganche`,`penganchee`,`penganchep`,`enganchet`) 
-                        VALUES (NULL,'$nombre','$datos2','$lote','$des','$condominio','$podescuento','$metraje',
-                        '$tipo','$pulista','$descuento','$plazo','$ms1','$ms2','$ms3',
-                        '$montoo','$enganche','$denganche','$emdies','$eepagar','$tapagar','$financiar','$cuota1',
-                        '$cuota2','$cuota3','$dat','$result1','$pdenganche','$poren2','$porepagar','$eapagar')";
-                        if($query1 = mysqli_query($conexion,$insert)){
-                            echo "datos almacenados correctamente";
-                        }else{
-                            echo "errro al almacenar los datos";
-                        }
+//                         //insercion de datos en la tabla
+//                         $insert = "INSERT INTO datos (`id`,`nombre`, `fecha`, `lote`, `desarrollo`, 
+//                         `condominio`, `descuento`, `metros`, `tipo`, `precioU`, `precioUD`, `tiempo`, `mes1`, `mes2`, `mes3`,
+//                          `monto`, `engancheE`, `desenganche`, `engancheEx`, `engancheP`, `totalP`, `Importe`, `mens1`, `mens2`,
+//                           `mens3`,`fech`,`dato`,`pdenganche`,`penganchee`,`penganchep`,`enganchet`) 
+//                         VALUES (NULL,'$nombre','$datos2','$lote','$des','$condominio','$podescuento','$metraje',
+//                         '$tipo','$pulista','$descuento','$plazo','$ms1','$ms2','$ms3',
+//                         '$montoo','$enganche','$denganche','$emdies','$eepagar','$tapagar','$financiar','$cuota1',
+//                         '$cuota2','$cuota3','$dat','$result1','$pdenganche','$poren2','$porepagar','$eapagar')";
+//                         if($query1 = mysqli_query($conexion,$insert)){
+//                             echo "datos almacenados correctamente";
+//                         }else{
+//                             echo "errro al almacenar los datos";
+//                         }
                         
                         
                     
-                        //tomar el valor del id de la simulacion y no el ultimo id generado
-                        $identificador = $ident;
-                        // $les="SELECT max(id) FROM datos where 1";
-                        // $ser=mysqli_query($conexion,$les);
-                        // $identificador = mysqli_fetch_row($ser);
+//                         //tomar el valor del id de la simulacion y no el ultimo id generado
+//                         $identificador = $ident;
+//                         // $les="SELECT max(id) FROM datos where 1";
+//                         // $ser=mysqli_query($conexion,$les);
+//                         // $identificador = mysqli_fetch_row($ser);
                         
                         
 
@@ -382,9 +288,9 @@ $cuota3 = 0;
     $nombre = "";
     $tiempo = "";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     $plazo = 0;
-    $pulista = 0; 
+    $pulista = ""; 
     $pudescuento = 0;
-    $podescuento = "";
+
     $plista = 0;
     $descuentoc= 0;
     $montoo = 0;
@@ -416,7 +322,11 @@ $cuota3 = 0;
     $cuota2 = 0;
     $cuota3 = 0;
     $mos = 0;
-  
+    $iva = 0;
+    $ko[0] = "lote";
+    $meses[0] = 0;
+    $años = 0;
+    $modulo = "";
 }
 
 if (isset($_POST['new'])){
@@ -430,9 +340,9 @@ if (isset($_POST['new'])){
     $nombre = "";
     $tiempo = "";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     $plazo = 0;
-    $pulista = 0; 
+    $pulista = ""; 
     $pudescuento = 0;
-    $podescuento = "";
+
     $plista = 0;
     $descuentoc= 0;
     $montoo = 0;
@@ -468,6 +378,11 @@ if (isset($_POST['new'])){
     $mos = 0;
     $identificador1 = 0;
     $identificador = 0;
+    $iva = 0;
+    $ko[0] = "lote";
+    $meses[0] = 0;
+    $años = 0;
+    $modulo = "";
 }
 
 ?>
@@ -528,6 +443,7 @@ if (isset($_POST['new'])){
                 <h3 class="text-uppercase blue-text text-end  text-bold"><?php echo $datos2." "; ?> </h3>
                 <br>
                 <h3 class="text-uppercase blue-text text-end  text-bold"><?php echo " simulacion numero: ".$ident; ?> </h3>
+                <h3 class="text-uppercase blue-text text-end  text-bold"><?php echo " valor del iva: ".$iva."%"; ?> </h3>
             </div>
             <hr class="pbhr">
         </div>
@@ -540,33 +456,20 @@ if (isset($_POST['new'])){
                     <div class="card p-3">
                         
                             <div class="form-group">
-                            <!-- <label class="blue-text" for="name">Parque</label>
-                                <input type="input" class="form-control" id="name" name="name" aria-describedby="name"
-                                     value="<?php echo $nombre;?>"><br> -->
                                 <label class="blue-text" for="name">Nombre</label>
                                 <input type="input" class="form-control" id="name" name="name" aria-describedby="name"
                                      value="<?php echo $nombre;?>"><br>
-                                <label class="blue-text" for="name">Fecha de apartado</label>
-                                <input type="date" class="form-control" name="date" id="date" aria-describedby="helpId" value="<?php echo $datos1 ?>"></option>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center pt-4">
-                                <h2 class="text-uppercase blue-text">lote</h2>
-                                <h3 class="text-uppercase secondary-text">REFERENCES: <?php echo $tipo ?> | <?php echo $condominio ?> | L-<?php echo $lote ?> | <?php echo $metraje ?>m<sup> 2</sup> </h3>
-                            <br>
-                            </div>
-                            <div class="row pt-3">
-                                <div class="col-12 col-xl-6 mt-2 order-xl-first">
-                                    <div class="form-group">
-                                        <label class="blue-text" for="desarrolloid">Desarrollo</label>
+                                     <div class="form-group">
+                                        <label class="blue-text" for="desarrolloid">Parque</label>
                                         <select name='desarrolloid' id='desarrolloid' class='form-control' title='Selecciona tu Estado'>
                                         <option value="<?php echo $des ?>"><?php echo $des ?></option>
                                             <?php
                                             include( "php/conexion.php" );
 
                                             mysqli_query( $conexion, "SET NAMES 'utf8'" );
-                                            $query = $conexion->query( "SELECT DISTINCT(desarrollo) FROM desarrollo order by  desarrollo asc");
+                                            $query = $conexion->query( "SELECT nombre FROM parque");
                                             while ( $valores = mysqli_fetch_array( $query ) ) {
-                                            echo '<option value="' . $valores[ 'desarrollo' ] . '">' . $valores[ 'desarrollo' ] . '</option>';
+                                            echo '<option value="' . $valores[ 0 ] . '">' . $valores[ 0 ] . '</option>';
                                         }
                                         ?>
                                         </select>
@@ -577,30 +480,27 @@ if (isset($_POST['new'])){
                                             <option>Lomas de Porttoblanco Cimatario</option>
                                         </select> -->
                                     </div>
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center pt-4">
+                                <h3 class="text-uppercase secondary-text">REFERENCES:  <?php echo $lote ?> | <?php echo $des ?> | <?php echo $modulo ?><sup> </sup> </h3>
+                            <br>
+                            </div>
+                            <div class="row pt-3">
                                 <div class="col-12 col-xl-6 mt-2 order-xl-first">
-                                    <div class="form-group">
-                                        <label class="blue-text" for="clusterid">Condominium</label>
-                                        <select class="form-control" title='Selecciona tu condominio' id="clusterid" name="clusterid" required>
-                                            <option value="<?php echo $condominio ?>"><?php echo $condominio ?></option>
-                                        </select>
-                                    </div>
+
+                                </div>
+                                <div class="col-12  mt-2 order-xl-first">
+                                   
                                      
                                 </div>
                                 <div class="col-6 col-xl-4 mt-2 order-xl-first">
                                     <div class="form-group">
-                                        <label class="blue-text" for="name">Lote</label>
+                                        <label class="blue-text" for="name"><?php echo $ko[0]  ?></label>
                                         <input type="input" class="form-control" id="name" aria-describedby="name"
                                              name="lote" required value="<?php echo $lote ?>">
                                     </div>
                                 </div>
-                                <div class="col-6 col-xl-4 mt-2 order-xl-last">
-                                    <div class="form-group">
-                                        <label class="blue-text" for="name">Descuento (%)</label>
-                                        <input type="input" class="form-control" id="name" name="descuento" aria-describedby="name"
-                                             required value="<?php echo $podescuento; ?>">
-                                    </div>
-                                </div>
+
                                 <div class="col-6 col-xl-4 mt-2 ">
                                     <div class="form-group">
                                         <label class="blue-text" for="area">Metros cuadrados</label>
@@ -610,22 +510,27 @@ if (isset($_POST['new'])){
                                 </div>
                                 <div class="col-6 col-xl-4 mt-2 ">
                                     <div class="form-group">
-                                        <label class="blue-text " for="name">Tipo</label>
-                                            <select class="form-control" id="exampleFormControlSelect1" name="tipo" required>
-                                                <option value="estandar">Estandar</option>
-                                                <option value="premium">Premium</option>
-                                            </select>
+                                        <label class="blue-text " for="name">Modulo</label>
+                                        <input type="input" class="form-control" id="area" aria-describedby="name"
+                                         name="modulo" required value="<?php echo $modulo ?>">
                                     </div>
                                 </div>
                                 <div class="col-6 col-xl-4 mt-2 order-xl-last">
                                     <div class="form-group">
+                                        <label class="blue-text" for="name">Descuento(%)</label>
+                                        <input type="input" class="form-control" id="name" name="descuento" aria-describedby="name"
+                                             required value="<?php echo $podescuento; ?>">
+                                    </div>
+                                    </div>    
+                                <div class="col-6 col-xl-4 mt-2 order-xl-last">
+                                    <div class="form-group">
                                         <label class="blue-text " for="name">Precio Unitario Lista </label>
                                         <div class="d-flex">
-                                            <img class="w-3 mr-1" src="img/icon/times-solid.svg"
-                                                alt="">
-                                        <p class="text-b"> <?php echo "$".number_format($pulista,2); ?> </p>
-                                        </div>
+
                                         
+                                        </div>
+                                        <input type="input" class="form-control" id="area" aria-describedby="name"
+                                         name="pulista" required value="<?php echo $pulista ?>">
                                     </div>
                                 </div>
                                 <div class="col-6 col-xl-4 mt-2 order-xl-last">
@@ -647,16 +552,14 @@ if (isset($_POST['new'])){
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label class="blue-text" for="name">Tiempo (años)</label>
-                                    <input type="input" class="form-control" id="name" aria-describedby="name"
-                                         name="tiempo" required value="<?php echo $tiempo; ?>">
+                                    <h3 class="blue-text"><?php echo $años; ?> Años</h3>
                                 </div>
                             </div>
                             <div class="col-6 d-flex align-items-end">
                                 <div class="d-flex align-items-start">
                                     <img class="w-3 mr-1" src="img/icon/calendar-alt-solid.svg"
                                         alt=""> 
-                                    <h3 class="blue-text"><?php echo $plazo; ?> meses</h3>
+                                    <h3 class="blue-text"><?php echo $meses[0]; ?> meses</h3>
                                 </div>
                                 
                             </div>
@@ -673,11 +576,7 @@ if (isset($_POST['new'])){
                                     <td><?php echo $ms2 ?> Meses</td>
                                     <td><?php echo $som[2];?>%</td>
                                 </tr>
-                                <tr>
-                                    <td><?php echo $ms22+1;?> A <?php echo $ms33;?> Meses </td>
-                                    <td><?php echo $ms3;?> Meses</td>
-                                    <td><?php echo $som[3];?>%</td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -714,6 +613,7 @@ if (isset($_POST['new'])){
                     </div>
                 </div>
                 <div class="col-12 col-xl-6">
+                
                     <!-- resumen de financiamiento -->
                     <div class="card p-3 mt-4 mt-xl-0">
                         <h2 class="text-uppercase blue-text mt-3">resumen del importe</h2>
@@ -723,6 +623,7 @@ if (isset($_POST['new'])){
                                     <th class="text-uppercase text-bold" scope="col">importe</th>
                                     <th class="text-uppercase text-bold" scope="col">%</th>
                                     <th class="text-uppercase text-bold" scope="col">subtotal</th>
+                                    <th class="text-uppercase text-bold" scope="col">C/iva</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -730,16 +631,19 @@ if (isset($_POST['new'])){
                                     <td>PRECIO DE LISTA </td>
                                     <td></td>
                                     <td><?php echo "$".number_format($plista,2); ?></td>
+                                    <td>0</td>
                                 </tr>
                                 <tr>
                                     <td>DESCUENTO</td>
                                     <td><?php echo $podescuento."%"; ?></td>
                                     <td><?php echo "$".number_format($descuentoc,2); ?></td>
+                                    <td>0</td>
                                 </tr>
                                 <tr>
                                     <td class="text-bold">MONTO DE OPERACIONES</td>
                                     <td></td>
                                     <td class="text-bold green-text"><?php echo "$".number_format($montoo,2); ?></td>
+                                    <td>0</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -749,6 +653,7 @@ if (isset($_POST['new'])){
                                     <label class="blue-text text-uppercase" for="name">enganche extra($)</label>
                                     <input type="input" class="form-control" id="name" aria-describedby="name"
                                      name="engancheextra" value="<?php echo $emdies; ?>" required>
+                                     
                                 </div>
                             </div>
                             <div class="col-12 col-md-6 d-flex align-items-end">
@@ -765,6 +670,7 @@ if (isset($_POST['new'])){
                                     <th class="text-uppercase text-bold" scope="col">importe</th>
                                     <th class="text-uppercase text-bold" scope="col">%</th>
                                     <th class="text-uppercase text-bold" scope="col">subtotal</th>
+                                    <th class="text-uppercase text-bold" scope="col">C/iva</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -772,31 +678,37 @@ if (isset($_POST['new'])){
                                     <td class="text-uppercase">Enganche </td>
                                     <td>10%</td>
                                     <td><?php echo "$".number_format($enganche,2); ?></td>
+                                    <td>0</td>
                                 </tr>
                                 <tr>
                                     <td class="text-uppercase">Descuento en el Enganche</td>
                                     <td><?php echo $pdenganche."%"; ?></td>
                                     <td><?php echo "$".number_format($denganche,2); ?></td>
+                                    <td>0</td>
                                 </tr>
                                 <tr>
                                     <td class="text-uppercase">Enganche extra</td>
                                     <td><?php echo $poren2."%"; ?></td>
                                     <td><?php echo "$".number_format($eepagar,2); ?></td>
+                                    <td>0</td>
                                 </tr>
                                 <tr>
                                     <td class="text-uppercase text-bold">Enganche a Pagar</td>
                                     <td><?php echo $porepagar."%"; ?></td>
                                     <td><?php echo "$".number_format($eapagar,2); ?></td>
+                                    <td>0</td>
                                 </tr>
                                 <tr>
                                     <td class="text-uppercase text-bold">total a pagar</td>
                                     <td></td>
                                     <td><?php echo "$".number_format($tapagar,2); ?></td>
+                                    <td>0</td>
                                 </tr>
                                 <tr>
                                     <td class="text-uppercase text-bold">importe a financiar </td>
                                     <td></td>
                                     <td class="text-bold green-text"><?php echo "$".number_format($montoaf,2); ?></td>
+                                    <td>0</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -814,10 +726,7 @@ if (isset($_POST['new'])){
                                     <td>Mensualidades <?php echo $ms1+1;?> A <?php echo $ms22;?> Meses </td>
                                     <td><?php echo "$".number_format($cuota2,2) ?></td>
                                 </tr>
-                                <tr>
-                                    <td>Mensualidades <?php echo $ms22+1;?> A <?php echo $ms33;?> Meses </td>
-                                    <td><?php echo "$".number_format($cuota3,2) ?></td>
-                                </tr>
+
                             </tbody>
                         </table>
                         
