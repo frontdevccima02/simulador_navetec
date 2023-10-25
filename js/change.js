@@ -67,14 +67,14 @@ let pbb=[
 let $desarrollo = document.getElementById("desarrolloid");
 let $condominium = document.getElementById("clusterid");
 
-logo.setAttribute("src","img/logos/porttoblanco.svg");
-function opcCondo(dev){
-    let element ='<option selected disabled>--Condominium--</option>'
-    for(let i = 0; i < dev.length;  i++){
-        element += '<option value="'+ dev[i].value +'">'+ dev[i].condo+'</option>';
-    }
-    $condominium.innerHTML = element
-}
+// logo.setAttribute("src","img/logos/porttoblanco.svg");
+// function opcCondo(dev){
+//     let element ='<option selected disabled>--Condominium--</option>'
+//     for(let i = 0; i < dev.length;  i++){
+//         element += '<option value="'+ dev[i].value +'">'+ dev[i].condo+'</option>';
+//     }
+//     $condominium.innerHTML = element
+// }
 
 document.addEventListener('DOMContentLoaded', function() {
     let valor = $desarrollo.value

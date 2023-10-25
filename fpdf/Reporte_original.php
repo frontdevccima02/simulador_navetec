@@ -314,7 +314,7 @@ $som = mysqli_fetch_row($ser);
 
 $som1 = $som[1]*0;
 $som2 = $som[2]*0.01;
-$som3 = $som[3]*0.01;
+$som3 = 1; //$som[3]*0.01
 
 $mos = $som11[25];
 $result2 = explode('-', $som11[25]);
@@ -432,7 +432,7 @@ if($dia < 6){
                                 $msci2 = $ms3;
                                 $añosmsci = $msci2 / 12;
                             
-                                $cuota = $porpagar * (pow(1+$som[3]/100 , $plasor) * $som[3]/100)/ (pow(1+$som[3]/100, $plasor)-1);
+                                $cuota = 1;// $porpagar * (pow(1+$som[1]/100 , $plasor) * $som[1]/100)/ (pow(1+$som[1]/100, $plasor)-1);
 
                                
                             }
